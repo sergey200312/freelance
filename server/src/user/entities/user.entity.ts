@@ -1,4 +1,4 @@
-import { Prop, Schema } from "@nestjs/mongoose";
+import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { UserRole } from "../roles.enum";
 
 export type UserDocument = User & Document;
@@ -25,3 +25,5 @@ export class User {
     avatar_url?: string
 
 }
+
+export const UserSchema = SchemaFactory.createForClass(User);
