@@ -10,6 +10,7 @@ import { CategoryModule } from './category/category.module';
 import { UserClientModule } from './user_client/user_client.module';
 import { ProposalModule } from './proposal/proposal.module';
 import { ReviewModule } from './review/review.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { ReviewModule } from './review/review.module';
     UserClientModule,
     ProposalModule,
     ReviewModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

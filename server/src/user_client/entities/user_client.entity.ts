@@ -1,6 +1,5 @@
-
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import mongoose from "mongoose";
+import mongoose, { Document } from 'mongoose';
 import { Order } from "src/order/entities/order.entity";
 import { User } from "src/user/entities/user.entity";
 

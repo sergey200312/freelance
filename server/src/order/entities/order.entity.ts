@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import mongoose from "mongoose";
+import mongoose, { Document } from 'mongoose';
 import { OrderStatus } from "../status.enum";
 import { UserClient } from "src/user_client/entities/user_client.entity";
 import { UserFreelancer } from "src/user_freelancer/entities/user_freelancer.entity";

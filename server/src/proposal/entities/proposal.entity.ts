@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import mongoose from "mongoose";
+import mongoose, { Document } from 'mongoose';
 import { Order } from "src/order/entities/order.entity";
 import { UserFreelancer } from "src/user_freelancer/entities/user_freelancer.entity";
 import { ProposalStatus } from "../status.enum";

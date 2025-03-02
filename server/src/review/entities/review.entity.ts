@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import mongoose from "mongoose";
+import mongoose, { Document } from 'mongoose';
 import { User } from "src/user/entities/user.entity";
 
 export type ReviewDocument = Review & Document;
