@@ -33,7 +33,7 @@ export class AuthService {
       email,
       firstName,
       lastName,
-      token: this.jwtService.sign({ _id: _id.toString(), email }),
+      token: this.jwtService.sign({ _id: _id, email }),
     };
   }
 }

@@ -8,10 +8,10 @@ export type ReviewDocument = Review & Document;
 export class Review {
 
     @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true })
-    recipient: User
+    recipient: mongoose.Types.ObjectId
 
     @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true })
-    sender: User
+    sender: mongoose.Types.ObjectId
 
     @Prop({ type: String, required: true })
     text: string

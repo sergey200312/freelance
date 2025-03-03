@@ -1,19 +1,19 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import mongoose, { Document } from 'mongoose';
 import { Order } from "src/order/entities/order.entity";
-import { UserFreelancer } from "src/user_freelancer/entities/user_freelancer.entity";
 import { ProposalStatus } from "../status.enum";
+import { User } from "src/user/entities/user.entity";
 
 export type ProposalDocument = Proposal & Document;
 
 @Schema({ timestamps: true })
 export class Proposal {
 
-    @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'UserFreelancer', required: true })
-    freelancer: UserFreelancer
+    @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true })
+    freelancer: mongoose.Types.ObjectId
 
     @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Order', required: true })
-    order: Order
+    order: mongoose.Types.ObjectId
 
     @Prop({ type: String })
     comment?: string
