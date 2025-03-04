@@ -1,4 +1,10 @@
 {
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"] // Добавьте этот алиас
+    }
+  },
   "files": [],
   "references": [
     { "path": "./tsconfig.app.json" },
