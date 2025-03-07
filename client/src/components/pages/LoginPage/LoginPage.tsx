@@ -27,7 +27,7 @@ export const LoginPage: FC = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      console.log('Отправка формы:', values) // Лог для проверки
+      console.log('Отправка формы:', values) 
       const result = await login(values).unwrap()
       toast('Вы успешно вошли в аккаунт')
     } catch (error: any) {
