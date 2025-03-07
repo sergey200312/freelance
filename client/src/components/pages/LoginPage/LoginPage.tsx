@@ -1,77 +1,46 @@
-import { FC } from 'react'
 import { z } from 'zod'
-import { zodResolver } from "@hookform/resolvers/zod"
+import React, { FC } from 'react'
 import { useForm } from 'react-hook-form'
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '../../ui/form'
-import { Button } from '../../ui/button'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../../ui/form'
 import { Input } from '../../ui/input'
-import { useRegisterMutation } from '../../../store/api/authApi'
+import { Button } from '../../ui/button'
+import { useLoginMutation } from '../../../store/api/authApi'
 import { toast } from 'sonner'
 import { handleApiError } from '../../../utils/handleApiError'
 
 const formSchema = z.object({
-  firstName: z.string().min(2, { message: 'Имя должно содержать как минимум 2 символа' }),
-  lastName: z.string().min(2, { message: 'Имя должно содержать как минимум 2 символа' }),
-  email: z.string().email({ message: 'Некорректный email адрес' }).nonempty(),
-  password: z.string().min(6, { message: 'Пароль должен содержать как минимум 6 символов' })
+  email: z.string().email({ message: 'Невалидный email' }),
+  password: z.string().nonempty({ message: 'Пароль не должен быть пустым' })
 })
 
 export const LoginPage: FC = () => {
-
-  const [register, { isLoading }] = useRegisterMutation()
+  const [login, { isLoading }] = useLoginMutation()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      firstName: '',
-      lastName: '',
       email: '',
-      password: '',
+      password: ''
     }
   })
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      const result = await register(values).unwrap()
-      toast('Регистрация прошла успешно', result.data?.message)
+      console.log('Отправка формы:', values) // Лог для проверки
+      const result = await login(values).unwrap()
+      toast('Вы успешно вошли в аккаунт')
     } catch (error: any) {
       handleApiError(error)
     }
   }
 
-
   return (
     <div className='min-h-screen flex justify-center items-center'>
       <div className='flex-col p-2'>
-        <p className='text-center font-bold text-2xl mb-8'>Регистрация</p>
-        <Form {...form}>
+        <p className='text-center font-bold text-2xl mb-8'>Вход</p> 
+        <Form {...form}> 
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 min-w-[350px]">
-            <FormField
-              control={form.control}
-              name="firstName"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Имя</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Имя" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="lastName"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Фамилия</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Фамилия" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
             <FormField
               control={form.control}
               name="email"
@@ -79,7 +48,7 @@ export const LoginPage: FC = () => {
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input placeholder="Email" {...field} />
+                    <Input type="email" placeholder="Email" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -92,14 +61,14 @@ export const LoginPage: FC = () => {
                 <FormItem>
                   <FormLabel>Пароль</FormLabel>
                   <FormControl>
-                    <Input placeholder="Пароль" {...field} />
+                    <Input type="password" placeholder="Пароль" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
             <div className='flex justify-center'>
-              <Button disabled={isLoading} variant='secondary' type="submit">Submit</Button>
+              <Button disabled={isLoading} variant='secondary' type="submit">Войти</Button>
             </div>
           </form>
         </Form>
