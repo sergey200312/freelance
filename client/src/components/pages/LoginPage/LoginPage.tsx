@@ -8,6 +8,8 @@ import { Button } from '../../ui/button'
 import { useLoginMutation } from '../../../store/api/authApi'
 import { toast } from 'sonner'
 import { handleApiError } from '../../../utils/handleApiError'
+import { useDispatch } from 'react-redux'
+import { login as authLogin } from '../../../store/features/authSlice'
 
 const formSchema = z.object({
   email: z.string().email({ message: 'Невалидный email' }),
@@ -16,6 +18,7 @@ const formSchema = z.object({
 
 export const LoginPage: FC = () => {
   const [login, { isLoading }] = useLoginMutation()
+  const dispatch = useDispatch()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -28,7 +31,8 @@ export const LoginPage: FC = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       console.log('Отправка формы:', values) 
-      const result = await login(values).unwrap()
+      const response = await login(values).unwrap()
+      dispatch(authLogin(response.token))
       toast('Вы успешно вошли в аккаунт')
     } catch (error: any) {
       handleApiError(error)

@@ -6,7 +6,7 @@ import { ILoginUser, IRegisterUser } from "../../types/types";
 export const authApi = createApi({
     reducerPath: 'authApi',
     baseQuery: fetchBaseQuery({
-        baseUrl: import.meta.env.VITE_BASE_API_URL
+        baseUrl: import.meta.env.VITE_BASE_API_URL,
     }),
     endpoints: (builder) => ({
         register: builder.mutation({
@@ -17,7 +17,7 @@ export const authApi = createApi({
             })
         }),
         login: builder.mutation({
-            query: (userData: ILoginUser ) => ({
+            query: (userData: ILoginUser) => ({
                 url: 'auth/login',
                 method: 'POST',
                 body: userData
@@ -26,7 +26,7 @@ export const authApi = createApi({
     })
 })
 
-export const { 
+export const {
     useRegisterMutation,
     useLoginMutation
- } = authApi
+} = authApi
