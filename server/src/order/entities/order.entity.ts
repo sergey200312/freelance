@@ -32,13 +32,13 @@ export class Order {
     deadline?: Date
 
     @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: true})
-    category: Category
+    category: mongoose.Types.ObjectId
 
     @Prop({ enum: Object.values(OrderStatus), default: OrderStatus.OPEN })
     status: OrderStatus
 
-    @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Proposal', required: true })
-    proposals?: Proposal[]
+    @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Proposal'})
+    proposals?: mongoose.Types.ObjectId[]
 
 }
 

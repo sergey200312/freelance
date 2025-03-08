@@ -1,15 +1,40 @@
 import { Injectable } from '@nestjs/common';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
+import { InjectModel } from '@nestjs/mongoose';
+import { Order, OrderDocument } from './entities/order.entity';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class OrderService {
-  create(createOrderDto: CreateOrderDto) {
-    return 'This action adds a new order';
+  constructor(
+    @InjectModel(Order.name) private orderModel: Model<OrderDocument>
+  ) {}
+
+  async create(userId: string, createOrderDto: CreateOrderDto) {
+
+    const newOrder = await this.orderModel.create({
+      client: userId,
+      freelancer: null,
+      title: createOrderDto.title,
+      description: createOrderDto.description,
+      budget: createOrderDto.budget,
+      files: createOrderDto.files,
+      deadline: createOrderDto.deadline,
+      category: createOrderDto.category
+    })
+
+    return newOrder;
   }
 
-  findAll() {
-    return `This action returns all order`;
+  async findAll() {
+    const order = await this.orderModel.find().exec()
+
+    if (!order) {
+      return { message: 'Заказы не найдены'}
+    }
+
+    return order
   }
 
   findOne(id: number) {
