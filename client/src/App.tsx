@@ -1,18 +1,15 @@
 
 import './App.css'
 import './index.css'
-import { Toaster } from './components/ui/sonner'
-import { LoginPage } from './components/pages/LoginPage/LoginPage'
-import { RegisterPage } from './components/pages/RegisterPage/RegisterPage'
-import { MainPage } from './components/pages/MainPage/MainPage'
+import { AppRoutes } from './router/AppRoutes'
+import { BrowserRouter, Router } from 'react-router-dom'
 
 function App() {
 
   return (
-    <>
-      <MainPage />
-      <Toaster />
-    </>
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
   )
 }
 
