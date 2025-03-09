@@ -1,12 +1,12 @@
-import { FC } from 'react'
 import { z } from 'zod'
-import { zodResolver } from "@hookform/resolvers/zod"
-import { Form, useForm } from 'react-hook-form'
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '../../ui/form'
-import { Button } from '../../ui/button'
+import React, { FC } from 'react'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../../ui/form'
 import { Input } from '../../ui/input'
-import { useRegisterMutation } from '../../../store/api/authApi'
+import { Button } from '../../ui/button'
 import { toast } from 'sonner'
+import { useRegisterMutation } from '../../../store/api/authApi'
 import { handleApiError } from '../../../utils/handleApiError'
 
 const formSchema = z.object({

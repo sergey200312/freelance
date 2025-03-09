@@ -1,12 +1,24 @@
 import { FC } from 'react'
-import { useGetOrdersQuery } from '../../../store/api/orderApi'
+import { Header } from '../../common/Header/Header'
+import { ServiceOverview } from '../../common/ServiceOverview/ServiceOverview.tsx'
+import { OrderList } from '../../common/Order/OrderList.tsx'
 
 export const MainPage: FC = () => {
 
-    const { data }= useGetOrdersQuery()
-    console.log(data)
   return (
-    <div>
+    <div className='flex flex-col'>
+        <Header />
+        <div className='grid grid-cols-4 gap-4 p-6'>
+          <div className='col-span-1'>
+            <ServiceOverview />
+          </div>
+          <div className='col-span-2'>
+            <OrderList />
+          </div>
+          <div className='col-span-1'>
+
+          </div>
+        </div>
     </div>
   )
 }

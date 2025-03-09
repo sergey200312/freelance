@@ -1,4 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=IBM+Plex+Mono:wght@100..700&family=Inknut+Antiqua:wght@300..900&family=Montserrat:wght@100..900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+body {
+    @apply font-mono
+}
