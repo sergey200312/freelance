@@ -27,12 +27,11 @@ export class AuthService {
   }
 
   async login(user: UserDocument) {
-    const { _id, email, firstName, lastName } = user;
+    const { _id, email, username} = user;
     return {
       _id,
       email,
-      firstName,
-      lastName,
+      username,
       token: this.jwtService.sign({ _id: _id, email }),
     };
   }

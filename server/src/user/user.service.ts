@@ -15,13 +15,18 @@ export class UserService {
 
     const existUser = await this.userModel.findOne({ email: createUserDto.email });
 
+    const existUserName = await this.userModel.findOne({ username: createUserDto.username })
+
     if (existUser) {
       throw new BadRequestException('Пользователь с таким email уже существует');
     }
 
+    if (existUserName) {
+      throw new BadRequestException('Пользователь с таким никнеймом уже существует')
+    }
+
     const user = new this.userModel({
-      firstName: createUserDto.firstName,
-      lastName: createUserDto.lastName,
+      username: createUserDto.username,
       email: createUserDto.email,
       password: await argon2.hash(createUserDto.password),
     });
