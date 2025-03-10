@@ -10,8 +10,7 @@ import { useRegisterMutation } from '../../../store/api/authApi'
 import { handleApiError } from '../../../utils/handleApiError'
 
 const formSchema = z.object({
-  firstName: z.string().min(2, { message: 'Имя должно содержать как минимум 2 символа' }),
-  lastName: z.string().min(2, { message: 'Имя должно содержать как минимум 2 символа' }),
+  username: z.string().min(2, { message: 'Никнейм должен содержать хотя бы 2 символа'}),
   email: z.string().email({ message: 'Некорректный email адрес' }).nonempty(),
   password: z.string().min(6, { message: 'Пароль должен содержать как минимум 6 символов' })
 })
@@ -23,8 +22,7 @@ export const RegisterPage: FC = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      firstName: '',
-      lastName: '',
+      username: '',
       email: '',
       password: '',
     }
@@ -48,25 +46,12 @@ export const RegisterPage: FC = () => {
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 min-w-[350px]">
             <FormField
               control={form.control}
-              name="firstName"
+              name="username"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Имя</FormLabel>
+                  <FormLabel>Никнейм</FormLabel>
                   <FormControl>
-                    <Input placeholder="Имя" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="lastName"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Фамилия</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Фамилия" {...field} />
+                    <Input placeholder="Никнейм" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

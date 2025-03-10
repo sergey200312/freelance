@@ -13,7 +13,7 @@ export const Header: FC = () => {
                         <li className='cursor-pointer mx-auto hover:border-b border-black transition-all duration-75'>Фрилансеры</li>
                     </ul>
                 </aside>
-                <div><Button variant='outline' className='bg-transparent border shadow-md shadow-black hover:shadow-none border-black hover:text-white hover:bg-black duration-400'>Авторизация</Button></div>
+                <div><Button variant='outline' className='bg-transparent border shadow-custom shadow-black hover:shadow-none border-black hover:text-white hover:bg-black duration-400'>Авторизация</Button></div>
             </div>
             <div className='absolute left-0 bottom-0  w-full h-[1px] bg-black'></div>
         </header>
