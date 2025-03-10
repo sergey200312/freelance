@@ -28,7 +28,7 @@ export class OrderService {
   }
 
   async findAll() {
-    const order = await this.orderModel.find().exec()
+    const order = await this.orderModel.find().populate('category').exec()
 
     if (!order) {
       return { message: 'Заказы не найдены'}

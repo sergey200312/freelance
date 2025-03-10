@@ -9,8 +9,8 @@ export class Category {
     @Prop({ type: String, required: true })
     name: string
 
-    @Prop({ type: String })
-    description?: string
+    @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Category' })
+    parent: mongoose.Types.ObjectId
 
     @Prop({ type: String, unique: true })
     slug?: string
