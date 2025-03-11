@@ -4,6 +4,7 @@ import * as argon2 from 'argon2'
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User, UserDocument } from './entities/user.entity';
+import { generateAvatar } from 'src/avatar/avatar.service';
 
 @Injectable()
 export class UserService {
@@ -13,9 +14,11 @@ export class UserService {
   
   async register(createUserDto: CreateUserDto) {
 
-    const existUser = await this.userModel.findOne({ email: createUserDto.email });
+    const { email, username, password } = createUserDto
 
-    const existUserName = await this.userModel.findOne({ username: createUserDto.username })
+    const existUser = await this.userModel.findOne({ email });
+
+    const existUserName = await this.userModel.findOne({ username })
 
     if (existUser) {
       throw new BadRequestException('Пользователь с таким email уже существует');
@@ -26,9 +29,10 @@ export class UserService {
     }
 
     const user = new this.userModel({
-      username: createUserDto.username,
-      email: createUserDto.email,
-      password: await argon2.hash(createUserDto.password),
+      username,
+      email,
+      password: await argon2.hash(password),
+      avatar_url: generateAvatar(email)
     });
 
     return user.save();

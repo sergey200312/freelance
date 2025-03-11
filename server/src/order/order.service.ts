@@ -9,7 +9,7 @@ import { Model } from 'mongoose';
 export class OrderService {
   constructor(
     @InjectModel(Order.name) private orderModel: Model<OrderDocument>
-  ) {}
+  ) { }
 
   async create(userId: string, createOrderDto: CreateOrderDto) {
 
@@ -27,11 +27,29 @@ export class OrderService {
     return newOrder;
   }
 
-  async findAll() {
-    const order = await this.orderModel.find().populate('category').exec()
+  async findAll(filters: any) {
+    console.log(filters)
+    const filtersQuery = {}
+
+    if (filters.searchTerm) {
+      filtersQuery['title'] = { $regex: filters.searchTerm, $options: 'i' }
+      filtersQuery['description'] = { $regex: filters.searchTerm, $options: 'i' }
+    }
+
+    const order = await this.orderModel.find(filtersQuery).sort({ createdAt: -1 })
+      .populate('client', 'avatar_url username')
+      .populate({
+        path: 'category',
+        select: 'name parent',
+        populate: {
+          path: 'parent',
+          select: 'name',
+        }
+      })
+      .exec()
 
     if (!order) {
-      return { message: 'Заказы не найдены'}
+      return { message: 'Заказы не найдены' }
     }
 
     return order
