@@ -13,7 +13,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'), // Добавьте этот алиас
+      '@': path.resolve(__dirname, './src'), 
     },
   },
 });

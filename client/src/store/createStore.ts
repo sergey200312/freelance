@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from './features/authSlice'
+import filterReducer from './features/filterSlice'
 import { baseApi } from "./api/baseApi";
 import { authApi } from "./api/authApi";
 
@@ -7,6 +8,7 @@ import { authApi } from "./api/authApi";
 export const createStore = configureStore({
     reducer: {
         auth: authReducer,
+        filter: filterReducer,
         [authApi.reducerPath]: authApi.reducer,
         [baseApi.reducerPath]: baseApi.reducer,
     },
