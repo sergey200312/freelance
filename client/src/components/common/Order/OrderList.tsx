@@ -3,14 +3,15 @@ import { useGetOrdersQuery } from '../../../store/api/orderApi'
 import { OrderItem } from './OrderItem'
 
 export const OrderList: FC = () => {
-    const { data } = useGetOrdersQuery()
+    const { data } = useGetOrdersQuery({})
     console.log(data)
 
     return (
         <div className='bg-white rounded-md shadow-custom p-4 min-w-[300px]'>
             {data && data.length > 0 ? (data?.map((order: any) => (
                 <OrderItem 
-                key={order.id} 
+                key={order._id}
+                id={order._id} 
                 category={order.category?.name || 'Без категории'} 
                 title={order.title} 
                 budget={order?.budget || 'Договорная' }
