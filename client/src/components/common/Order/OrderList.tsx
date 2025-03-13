@@ -1,10 +1,12 @@
 import React, { FC } from 'react'
 import { useGetOrdersQuery } from '../../../store/api/orderApi'
 import { OrderItem } from './OrderItem'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../../store/createStore'
 
 export const OrderList: FC = () => {
-    const { data } = useGetOrdersQuery({})
-    console.log(data)
+    const filter = useSelector((state: RootState) => state.filter)
+    const { data } = useGetOrdersQuery(filter)
 
     return (
         <div className='bg-white rounded-md shadow-custom p-4 min-w-[300px]'>

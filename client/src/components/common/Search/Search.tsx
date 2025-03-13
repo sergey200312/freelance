@@ -10,15 +10,15 @@ export const Search: FC = () => {
     const debouncedSearchTerm = useDebounce(searchTerm.value, 500)
     const dispatch = useDispatch()
 
+
     useEffect(() => {
-        if (debouncedSearchTerm) {
-            dispatch(setSearchQuery(debouncedSearchTerm))
-        }
+        dispatch(setSearchQuery(debouncedSearchTerm))
     }, [debouncedSearchTerm])
 
     return (
         <div>
-            <Input {...searchTerm}/>
+            <Input className='border-gray-300' placeholder='Поиск по ключевым словам...(Название, Описание)'{...searchTerm} />
         </div>
+
     )
 }

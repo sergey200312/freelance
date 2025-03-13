@@ -10,7 +10,7 @@ export const OrderDetailPage: FC = () => {
     const { id } = useParams()
     console.log(id)
 
-    const { data, isLoading } = useGetDetailsOrderQuery()
+    const { data, isLoading } = useGetDetailsOrderQuery(id)
 
     if (isLoading) return <Loader />
 

@@ -20,7 +20,10 @@ interface IOrderItemProps {
     parentCategory: string
 }
 
-export const OrderItem: FC<IOrderItemProps> = ({ id, title, category, budget, status, createdAt, deadline, avatar_url, username, parentCategory }) => {
+export const OrderItem: FC<IOrderItemProps> = ({
+     id, title, category, budget, status, createdAt,
+     deadline, avatar_url, username, parentCategory 
+    }) => {
     return (
         <Link to = {`/order-details/${id}`}>
             <div className='flex flex-col p-4 gap-4 border-b border-black border-solid'>
