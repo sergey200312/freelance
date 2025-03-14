@@ -3,7 +3,7 @@ import useInput from './useInput'
 import useDebounce from './useDebounce'
 
 interface Option {
-    id: number
+    _id: number
     name: string
 }
 
@@ -11,7 +11,7 @@ const useDropdown = (options: Option[], delay: number) => {
 
     const searchTerm = useInput('')
     const [isFocus, setIsFocus] = useState(false)
-    const [, setSelectedOption] = useState('')
+    const [_, setSelectedOption] = useState('')
     const debouncedSearchTerm = useDebounce(searchTerm.value, delay)
 
     const filteredValues = options.filter(opt =>
@@ -35,7 +35,7 @@ const useDropdown = (options: Option[], delay: number) => {
         handleBlur, 
         handleFocus, 
         handleSelect,
-        debouncedSearchTerm
+        debouncedSearchTerm,
     }
 }
 

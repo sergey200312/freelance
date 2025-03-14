@@ -1,11 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 interface IFilterState {
-    searchQuery: string
+    searchTerm: string,
+    categoryName: string,
+    specializationName: string
 }
 
 const initialState: IFilterState = {
-    searchQuery: ''
+    searchTerm: '',
+    categoryName: '',
+    specializationName: ''
 }
 
 const filterSlice = createSlice({
@@ -13,10 +17,20 @@ const filterSlice = createSlice({
     initialState, 
     reducers: {
         setSearchQuery(state, action: PayloadAction<string>) {
-            state.searchQuery = action.payload
+            state.searchTerm = action.payload
+        },
+        setCategoryName(state, action: PayloadAction<string>) {
+            state.categoryName = action.payload
+        },
+        setSpecializationName(state, action: PayloadAction<string>) {
+            state.specializationName = action.payload
         }
     }
 })
 
-export const { setSearchQuery } = filterSlice.actions
+export const { 
+    setSearchQuery,
+    setCategoryName,
+    setSpecializationName
+} = filterSlice.actions
 export default filterSlice.reducer

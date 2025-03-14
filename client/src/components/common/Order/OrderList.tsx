@@ -6,10 +6,11 @@ import { RootState } from '../../../store/createStore'
 
 export const OrderList: FC = () => {
     const filter = useSelector((state: RootState) => state.filter)
+    
     const { data } = useGetOrdersQuery(filter)
 
     return (
-        <div className='bg-white rounded-md shadow-custom p-4 min-w-[300px]'>
+        <div className='bg-white border border-gray-200 rounded-xl p-4 shadow-custom  min-w-[300px]'>
             {data && data.length > 0 ? (data?.map((order: any) => (
                 <OrderItem 
                 key={order._id}

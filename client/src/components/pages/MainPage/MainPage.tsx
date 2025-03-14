@@ -1,8 +1,8 @@
 import { FC } from 'react'
 import { OrderList } from '../../common/Order/OrderList.tsx'
 import { MainLayout } from '../../../layouts/MainLayout.tsx'
-import { Search } from '../../common/Search/Search.tsx'
-import { Select } from '../../common/Search/Select.tsx'
+import { Filters } from '../../common/Filter/Filters.tsx'
+import { Search } from '../../common/Filter/Search.tsx'
 
 
 export const MainPage: FC = () => {
@@ -10,8 +10,7 @@ export const MainPage: FC = () => {
   return (
     <MainLayout>
       <div className='mb-6'>
-      <Search />
-      <Select />
+        <Filters />
       </div>
       <OrderList />
     </MainLayout>

@@ -17,7 +17,7 @@ export const Search: FC = () => {
 
     return (
         <div>
-            <Input className='border-gray-300' placeholder='Поиск по ключевым словам...(Название, Описание)'{...searchTerm} />
+            <Input className='' placeholder='Поиск по ключевым словам...(Название, Описание)'{...searchTerm} />
         </div>
 
     )

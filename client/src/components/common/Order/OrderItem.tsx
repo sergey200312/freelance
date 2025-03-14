@@ -28,13 +28,13 @@ export const OrderItem: FC<IOrderItemProps> = ({
         <Link to = {`/order-details/${id}`}>
             <div className='flex flex-col p-4 gap-4 border-b border-black border-solid'>
                 <div className='flex justify-between'>
-                    <p className='font-bold text-xl'>{title}</p>
+                    <p className='text-gray-900 font-bold text-lg'>{title}</p>
                     <div className='flex gap-1 items-center'>
-                        <img src="/money-svgrepo-com.svg" alt="Иконка" width={40} height={40} /><p className='font-semibold'>{budget}₽</p>
+                        <img src="/money-svgrepo-com.svg" alt="Иконка" width={40} height={40} /><p className='text-amber-500 font-semibold text-lg'>{budget}₽</p>
                     </div>
                 </div>
                 <div className='flex justify-between items-center'>
-                    <p className='text-slate-500'>{parentCategory} / {category}</p>
+                    <p className='text-gray-600 italic'>{parentCategory} / {category}</p>
                     <div className={` ${orderStatus[status].bgcolor} px-2  rounded-md flex gap-2 items-center`} >
                         <img src={orderStatus[status].img} alt={orderStatus[status].name} height={15} width={15} />
                         <p className='text-white'>{orderStatus[status].name}</p>
@@ -48,7 +48,7 @@ export const OrderItem: FC<IOrderItemProps> = ({
                     <div className='flex items-center gap-2'>
                         <p>{dateFormatter(new Date(createdAt))}</p>
                         <span>→</span>
-                        <p>{dateFormatter(new Date(deadline), 'Без срока выполнения')}</p>
+                        <p className=''>{dateFormatter(new Date(deadline), 'Без срока выполнения')}</p>
                     </div>
                 </div>
             </div>
