@@ -1,3 +1,4 @@
+import { IOrderData } from '../../types/types';
 import { baseApi } from './baseApi';
 
 export const orderApi = baseApi.injectEndpoints({
@@ -14,6 +15,13 @@ export const orderApi = baseApi.injectEndpoints({
                 url: `/order/${id}`,
                 method: 'GET',
             })
+        }),
+        createOrder: builder.mutation({
+            query: (orderData: IOrderData) => ({
+                url: '/order',
+                method: 'POST',
+                body: orderData
+            })
         })
     }),
     overrideExisting: false
@@ -21,5 +29,6 @@ export const orderApi = baseApi.injectEndpoints({
 
 export const { 
     useGetOrdersQuery,
-    useGetDetailsOrderQuery
+    useGetDetailsOrderQuery,
+    useCreateOrderMutation
  } = orderApi;

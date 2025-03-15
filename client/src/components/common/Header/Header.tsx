@@ -20,7 +20,7 @@ export const Header: FC = () => {
                 <div><Button variant='default' className='shadow-default'
                 onClick={() => dispatch(logout())}>Выйти</Button></div>
             </div>
-            <div className='absolute left-0 bottom-0  w-full h-[1px] bg-black'></div>
+            <div className='absolute left-0 bottom-0  w-full h-[1px] bg-sky-600 shadow-default'></div>
         </header>
     )
 }

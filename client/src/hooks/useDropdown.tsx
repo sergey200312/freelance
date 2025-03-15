@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import useInput from './useInput'
 import useDebounce from './useDebounce'
 
-interface Option {
+export interface Option {
     _id: number
     name: string
 }

@@ -17,14 +17,14 @@ export const Filters: FC = () => {
                     <SelectDropdown
                         placeholder="Выберите категорию..."
                         filterCondition={(el) => !el.parent}
-                        onSelect={(name) => dispatch(setCategoryName(name))}
+                        onSelect={(category) => dispatch(setCategoryName(category.name))}
                     />
                 </div>
                 <div className='shadow-default'>
                     <SelectDropdown
                         placeholder="Выберите специализацию..."
                         filterCondition={(el) => el.parent}
-                        onSelect={(name) => dispatch(setSpecializationName(name))}
+                        onSelect={(category) => dispatch(setSpecializationName(category.name))}
                     />
                 </div>
             </div>

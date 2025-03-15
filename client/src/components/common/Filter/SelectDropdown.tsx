@@ -3,11 +3,12 @@ import { Input } from '../../ui/input'
 import { useDispatch } from 'react-redux'
 import useDropdown from '../../../hooks/useDropdown'
 import { useGetAllCategoriesQuery } from '../../../store/api/categoryApi'
+import { Option } from '../../../hooks/useDropdown'
 
 interface SelectDropdownProps {
     placeholder: string;
     filterCondition: (el: any) => boolean;
-    onSelect: (name: string) => void;
+    onSelect?: (category: Option) => void;
 }
 
 export const SelectDropdown: FC<SelectDropdownProps> = ({ placeholder, filterCondition, onSelect }) => {
@@ -35,7 +36,7 @@ export const SelectDropdown: FC<SelectDropdownProps> = ({ placeholder, filterCon
                                 key={category._id}
                                 onMouseDown={() => {
                                     dropDown.handleSelect(category);
-                                    onSelect(category.name);
+                                    onSelect && onSelect(category);
                                 }}
                             >
                                 {category.name}

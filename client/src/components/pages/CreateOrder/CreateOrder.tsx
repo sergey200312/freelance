@@ -6,38 +6,52 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '../../ui/input'
 import { Button } from '../../ui/button'
 import { MainLayout } from '../../../layouts/MainLayout'
+import { Textarea } from '../../ui/textarea'
+import { SelectDropdown } from '../../common/Filter/SelectDropdown'
+import { useCreateOrderMutation } from '../../../store/api/orderApi'
+import { toast } from 'sonner'
+import { handleApiError } from '../../../utils/handleApiError'
 
 const formSchema = z.object({
     title: z.string().min(5, { message: 'Заголовок должен содержать от 5 до 300 символов' }).max(300, { message: 'Заголовок должен содержать от 5 до 300 символов' }),
-    description: z.string().min(10, { message: 'Описание должно содержать от 10 до 2000 символов' }).max(2000, { message: 'Описание должно содержать от 10 до 2000 символов' })
+    description: z.string().min(10, { message: 'Описание должно содержать от 10 до 2000 символов' }).max(2000, { message: 'Описание должно содержать от 10 до 2000 символов' }),
+    category: z.string({ message: 'Выберите категорию' }),
+    specialization: z.string({ message: 'Выберите специализацию' }),
+    budget: z.string({ message: 'Выберите бюджет' })
+
 })
 export const CreateOrder: FC = () => {
+
+    const [createOrder, { isLoading }] = useCreateOrderMutation()
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
             title: '',
-            description: ''
+            description: '',
+            category: undefined,
+            specialization: undefined,
+            budget: ''
         }
     })
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
-        // try {
-        //   console.log('Отправка формы:', values) 
-        //   const response = await login(values).unwrap()
-        //   dispatch(authLogin(response.token))
-        //   toast('Вы успешно вошли в аккаунт')
-        // } catch (error: any) {
-        //   handleApiError(error)
-        // }
+        const { category, ...restValues } = values
+        try {
+          console.log('Отправка формы:', restValues) 
+          const response = await createOrder(restValues).unwrap()
+          toast('Заказ создан')
+        } catch (error: any) {
+          handleApiError(error)
+        }
     }
 
     return (
         <MainLayout>
-            <div className='min-h-screen flex justify-center items-center bg-gray-200 shadow-default '>
-                <div className=''>
+            <div className='min-h-screen flex justify-center items-center bg-gray-200 shadow-default rounded-md'>
+                <div className='w-full p-6'>
                     <p className='text-center font-bold text-2xl mb-8 '>Создание заказа</p>
                     <Form {...form}>
-                        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 min-w-[350px]">
+                        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 ">
                             <FormField
                                 control={form.control}
                                 name="title"
@@ -58,12 +72,63 @@ export const CreateOrder: FC = () => {
                                     <FormItem>
                                         <FormLabel>Описание</FormLabel>
                                         <FormControl>
-                                            <Input type="text" placeholder="Описание" {...field} />
+                                            <Textarea rows={6} placeholder="Описание" {...field} />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
                                 )}
                             />
+                            <div className='flex  gap-4'>
+                                <FormField
+                                    control={form.control}
+                                    name="category"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Категория</FormLabel>
+                                            <FormControl>
+                                                <SelectDropdown
+                                                    placeholder="Выберите специализацию..."
+                                                    filterCondition={(el: any) => el.parent}
+                                                    onSelect={(category) => field.onChange(category._id)}
+                                                    {...field}
+                                                />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    control={form.control}
+                                    name="specialization"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Специализация</FormLabel>
+                                            <FormControl>
+                                                <SelectDropdown
+                                                    placeholder="Выберите специализацию..."
+                                                    filterCondition={(el: any) => !el.parent}
+                                                    onSelect={(category) => field.onChange(category._id)}
+                                                    {...field}
+                                                />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    control={form.control}
+                                    name="budget"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Бюджет</FormLabel>
+                                            <FormControl>
+                                                <Input type='number' placeholder='Если оставляете поле пустым, то цена будет договорная' {...field} />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                            </div>
                             <div className='flex justify-center'>
                                 <Button variant='secondary' type="submit">Войти</Button>
                             </div>
