@@ -8,19 +8,19 @@ export const Filters: FC = () => {
     const dispatch = useDispatch()
 
     return (
-        <div className="mb-6">
-            <div>
+        <div className="mb-6 ">
+            <div className='shadow-default '>
                 <Search />
             </div>
-            <div className='mt-2 grid grid-cols-2 gap-2'>
-                <div>
+            <div className='mt-2 grid grid-cols-2 gap-2 '>
+                <div className='shadow-default'>
                     <SelectDropdown
                         placeholder="Выберите категорию..."
                         filterCondition={(el) => !el.parent}
                         onSelect={(name) => dispatch(setCategoryName(name))}
                     />
                 </div>
-                <div>
+                <div className='shadow-default'>
                     <SelectDropdown
                         placeholder="Выберите специализацию..."
                         filterCondition={(el) => el.parent}

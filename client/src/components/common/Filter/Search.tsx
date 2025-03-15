@@ -16,7 +16,7 @@ export const Search: FC = () => {
     }, [debouncedSearchTerm])
 
     return (
-        <div>
+        <div >
             <Input className='' placeholder='Поиск по ключевым словам...(Название, Описание)'{...searchTerm} />
         </div>
 

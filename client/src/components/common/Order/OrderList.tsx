@@ -10,7 +10,7 @@ export const OrderList: FC = () => {
     const { data } = useGetOrdersQuery(filter)
 
     return (
-        <div className='bg-white border border-gray-200 rounded-xl p-4 shadow-custom  min-w-[300px]'>
+        <div className='bg-gray-200 border border-gray-200 rounded-xl p-4 shadow-default min-w-[300px]'>
             {data && data.length > 0 ? (data?.map((order: any) => (
                 <OrderItem 
                 key={order._id}

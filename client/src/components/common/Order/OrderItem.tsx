@@ -27,7 +27,7 @@ export const OrderItem: FC<IOrderItemProps> = ({
     return (
         <Link to = {`/order-details/${id}`}>
             <div className='flex flex-col p-4 gap-4 border-b border-black border-solid'>
-                <div className='flex justify-between'>
+                <div className='flex justify-between items-center'>
                     <p className='text-gray-900 font-bold text-lg'>{title}</p>
                     <div className='flex gap-1 items-center'>
                         <img src="/money-svgrepo-com.svg" alt="Иконка" width={40} height={40} /><p className='text-amber-500 font-semibold text-lg'>{budget}₽</p>

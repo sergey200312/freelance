@@ -5,6 +5,7 @@ import { RegisterPage } from '../components/pages/RegisterPage/RegisterPage'
 import { LoginPage } from '../components/pages/LoginPage/LoginPage'
 import { OrderDetailPage } from '../components/pages/OrderDetailPage/OrderDetailPage'
 import { PrivateRouter } from '../components/PrivateRouter'
+import { CreateOrder } from '../components/pages/CreateOrder/CreateOrder'
 
 
 export const AppRoutes = () => {
@@ -13,6 +14,7 @@ export const AppRoutes = () => {
             <Route element={<PrivateRouter />}>
                 <Route path={ROUTES.ORDERDETAILS} element={<OrderDetailPage />} />
                 <Route path={ROUTES.MAIN} element={<MainPage />} />
+                <Route path={ROUTES.CREATEORDER} element={<CreateOrder />} />
             </Route>
             <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
             <Route path={ROUTES.LOGIN} element={<LoginPage />} />

@@ -3,7 +3,7 @@ import { Header } from '../components/common/Header/Header'
 import { ServiceOverview } from '../components/common/ServiceOverview/ServiceOverview.tsx'
 
 interface IMainLayoutProps {
-    children: ReactNode
+    children: ReactNode,
 }
 
 export const MainLayout: FC<IMainLayoutProps> = ({ children }) => {
