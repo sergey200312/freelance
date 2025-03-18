@@ -17,7 +17,7 @@ const formSchema = z.object({
     description: z.string().min(10, { message: 'Описание должно содержать от 10 до 2000 символов' }).max(2000, { message: 'Описание должно содержать от 10 до 2000 символов' }),
     category: z.string({ message: 'Выберите категорию' }),
     specialization: z.string({ message: 'Выберите специализацию' }),
-    budget: z.string({ message: 'Выберите бюджет' })
+    budget: z.preprocess((val) => Number(val) || 0, z.number().min(0, { message: 'Бюджет должен быть числом' }))
 
 })
 export const CreateOrder: FC = () => {
@@ -28,20 +28,19 @@ export const CreateOrder: FC = () => {
         defaultValues: {
             title: '',
             description: '',
-            category: undefined,
-            specialization: undefined,
-            budget: ''
+            category: '',
+            specialization: '',
+            budget: null
         }
     })
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
-        const { category, ...restValues } = values
         try {
-          console.log('Отправка формы:', restValues) 
-          const response = await createOrder(restValues).unwrap()
-          toast('Заказ создан')
+            console.log('Отправка формы:', values)
+            const response = await createOrder(values).unwrap();
+            toast('Заказ создан')
         } catch (error: any) {
-          handleApiError(error)
+            handleApiError(error)
         }
     }
 
@@ -87,7 +86,7 @@ export const CreateOrder: FC = () => {
                                             <FormLabel>Категория</FormLabel>
                                             <FormControl>
                                                 <SelectDropdown
-                                                    placeholder="Выберите специализацию..."
+                                                    placeholder="Выберите категорию..."
                                                     filterCondition={(el: any) => el.parent}
                                                     onSelect={(category) => field.onChange(category._id)}
                                                     {...field}
@@ -107,7 +106,7 @@ export const CreateOrder: FC = () => {
                                                 <SelectDropdown
                                                     placeholder="Выберите специализацию..."
                                                     filterCondition={(el: any) => !el.parent}
-                                                    onSelect={(category) => field.onChange(category._id)}
+                                                    onSelect={(specialization) => field.onChange(specialization._id)}
                                                     {...field}
                                                 />
                                             </FormControl>
