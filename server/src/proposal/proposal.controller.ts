@@ -5,6 +5,7 @@ import { UpdateProposalDto } from './dto/update-proposal.dto';
 
 @Controller('proposal')
 export class ProposalController {
+
   constructor(private readonly proposalService: ProposalService) {}
 
   @Post()

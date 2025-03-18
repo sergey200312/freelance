@@ -15,15 +15,17 @@ export class OrderService {
 
   async create(userId: string, createOrderDto: CreateOrderDto) {
 
+    const { title, description, budget, files, deadline, category } = createOrderDto
+
     const newOrder = await this.orderModel.create({
       client: userId,
       freelancer: null,
-      title: createOrderDto.title,
-      description: createOrderDto.description,
-      budget: createOrderDto.budget,
-      files: createOrderDto.files,
-      deadline: createOrderDto.deadline,
-      category: createOrderDto.category
+      title,
+      description,
+      budget,
+      files,
+      deadline,
+      category,
     })
 
     return newOrder;
