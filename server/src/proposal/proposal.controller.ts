@@ -15,9 +15,14 @@ export class ProposalController {
     return this.proposalService.create(createProposalDto);
   }
 
+  @Get()
+  findAll(@CurrentUser() currentUser: IUser) {
+    return this.proposalService.findAll(currentUser._id);
+  }
+
   @Get(':id')
-  findAll(@CurrentUser() currentUser: IUser, @Param('id') orderId: string) {
-    return this.proposalService.findAll(currentUser._id, orderId);
+  findOne(@CurrentUser() currentUser: IUser, @Param('id') orderId: string) {
+    return this.proposalService.findOne(currentUser._id, orderId);
   }
 
 

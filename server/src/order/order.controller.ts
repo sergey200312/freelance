@@ -23,10 +23,17 @@ export class OrderController {
     return this.orderService.findAll(filters);
   }
 
+  @Get('my')
+  @UseGuards(JwtAuthGuard)
+  findMyOrders(@CurrentUser() user: IUser) {
+    return this.orderService.findMyOrders(user._id)
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.orderService.findOne(+id);
   }
+
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateOrderDto: UpdateOrderDto) {
