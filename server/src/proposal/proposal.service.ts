@@ -51,8 +51,20 @@ export class ProposalService {
     return newProposal;
   }
 
-  findAll() {
-    return `This action returns all proposal`;
+  async findAll(userId: string, orderId: string) {
+    const order = await this.orderModel.findOne({ _id: orderId, user: userId })
+
+    if (!order) {
+      return { message: 'Заказ не найден'}
+    }
+
+    const proposals = await this.proposalModel.find({ order: orderId })
+
+    if (!proposals.length) {
+      return { message: 'Список предложений пуст' }
+    }
+
+    return { proposals }
   }
 
   findOne(id: number) {

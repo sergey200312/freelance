@@ -2,6 +2,8 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { ProposalService } from './proposal.service';
 import { CreateProposalDto } from './dto/create-proposal.dto';
 import { UpdateProposalDto } from './dto/update-proposal.dto';
+import { CurrentUser } from 'src/decorators/current-user.decorator';
+import { IUser } from 'src/types/types';
 
 @Controller('proposal')
 export class ProposalController {
@@ -13,15 +15,11 @@ export class ProposalController {
     return this.proposalService.create(createProposalDto);
   }
 
-  @Get()
-  findAll() {
-    return this.proposalService.findAll();
+  @Get(':id')
+  findAll(@CurrentUser() currentUser: IUser, @Param('id') orderId: string) {
+    return this.proposalService.findAll(currentUser._id, orderId);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.proposalService.findOne(+id);
-  }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateProposalDto: UpdateProposalDto) {
