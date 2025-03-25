@@ -22,7 +22,13 @@ export const orderApi = baseApi.injectEndpoints({
                 method: 'POST',
                 body: orderData
             })
-        })
+        }),
+        getMyOrders: builder.query({
+            query: () => ({
+                url: '/order/my',
+                method: 'GET'
+            })
+        }),
     }),
     overrideExisting: false
 });
@@ -30,5 +36,6 @@ export const orderApi = baseApi.injectEndpoints({
 export const { 
     useGetOrdersQuery,
     useGetDetailsOrderQuery,
-    useCreateOrderMutation
+    useCreateOrderMutation,
+    useGetMyOrdersQuery
  } = orderApi;
