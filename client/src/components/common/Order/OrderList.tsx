@@ -3,15 +3,17 @@ import { useGetOrdersQuery } from '../../../store/api/orderApi'
 import { OrderItem } from './OrderItem'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../store/createStore'
+import { IGetOrder } from '../../../types/types'
+import { Loader } from '../Loader/Loader'
 
-export const OrderList: FC = () => {
-    const filter = useSelector((state: RootState) => state.filter)
-    
-    const { data } = useGetOrdersQuery(filter)
 
+interface IOrderListProps {
+    orders: IGetOrder[]
+}
+export const OrderList: FC<IOrderListProps> = ({ orders }) => {
     return (
         <div className='bg-gray-200 border border-gray-200 rounded-xl p-4 shadow-default min-w-[300px]'>
-            {data && data.length > 0 ? (data?.map((order: any) => (
+            {orders && orders.length > 0 ? (orders?.map((order: any) => (
                 <OrderItem 
                 key={order._id}
                 id={order._id} 

@@ -6,6 +6,7 @@ import { LoginPage } from '../components/pages/LoginPage/LoginPage'
 import { OrderDetailPage } from '../components/pages/OrderDetailPage/OrderDetailPage'
 import { PrivateRouter } from '../components/PrivateRouter'
 import { CreateOrder } from '../components/pages/CreateOrder/CreateOrder'
+import { MyPosterOrders } from '../components/pages/MyPosterOrders/MyPosterOrders'
 
 
 export const AppRoutes = () => {
@@ -15,6 +16,7 @@ export const AppRoutes = () => {
                 <Route path={ROUTES.ORDERDETAILS} element={<OrderDetailPage />} />
                 <Route path={ROUTES.MAIN} element={<MainPage />} />
                 <Route path={ROUTES.CREATEORDER} element={<CreateOrder />} />
+                <Route path={ROUTES.MYPOSTERORDERS} element={<MyPosterOrders />} />
             </Route>
             <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
             <Route path={ROUTES.LOGIN} element={<LoginPage />} />

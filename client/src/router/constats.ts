@@ -3,5 +3,6 @@ export const ROUTES = {
     REGISTER: '/register',
     LOGIN: '/login',
     ORDERDETAILS: `/order-details/:id`,
-    CREATEORDER: '/order/create'
+    CREATEORDER: '/order/create',
+    MYPOSTERORDERS: '/my-orders'
 }

@@ -2,6 +2,6 @@ import React, { FC } from 'react'
 
 export const Loader: FC = () => {
   return (
-    <div>Идет загрузкаа... Подождите</div>
+    <div><p className='text-white'>Идет загрузка... Подождите</p></div>
   )
 }

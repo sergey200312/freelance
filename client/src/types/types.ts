@@ -16,3 +16,14 @@ export interface IOrderData {
     budget: number | null,
     deadline?: Date
 }
+
+export interface IGetOrder {
+    _id: string;
+    category: { name: string; parent?: { name: string } };
+    title: string;
+    budget: string;
+    status: string;
+    createdAt: string;
+    deadline: string;
+    client: { avatar_url: string; username: string };
+  }
