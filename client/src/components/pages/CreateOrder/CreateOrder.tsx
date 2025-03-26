@@ -129,7 +129,7 @@ export const CreateOrder: FC = () => {
                                 />
                             </div>
                             <div className='flex justify-center'>
-                                <Button variant='secondary' type="submit">Войти</Button>
+                                <Button variant='secondary' type="submit">Сохранить</Button>
                             </div>
                         </form>
                     </Form>
