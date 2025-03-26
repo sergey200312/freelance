@@ -2,8 +2,8 @@ import React, { FC } from 'react'
 import { orderStatus } from '../../../constants/orderStatus'
 import { dateFormatter } from '../../../utils/dateFormatter';
 import { Link } from 'react-router-dom';
+import { OrderStatus } from '../../../types/types';
 
-type OrderStatus = 'open' | 'in_progress' | 'completed';
 
 
 

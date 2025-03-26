@@ -5,7 +5,7 @@ export interface IRegisterUser {
 }
 
 export interface ILoginUser {
-    email: string, 
+    email: string,
     password: string
 }
 
@@ -22,8 +22,10 @@ export interface IGetOrder {
     category: { name: string; parent?: { name: string } };
     title: string;
     budget: string;
-    status: string;
-    createdAt: string;
-    deadline: string;
+    status: OrderStatus;
+    createdAt: Date;
+    deadline: Date | string;
     client: { avatar_url: string; username: string };
-  }
+}
+
+export type OrderStatus = 'open' | 'in_progress' | 'completed';

@@ -11,6 +11,8 @@ import { SelectDropdown } from '../../common/Filter/SelectDropdown'
 import { useCreateOrderMutation } from '../../../store/api/orderApi'
 import { toast } from 'sonner'
 import { handleApiError } from '../../../utils/handleApiError'
+import { useNavigate } from 'react-router-dom'
+import { ROUTES } from '../../../router/constats'
 
 const formSchema = z.object({
     title: z.string().min(5, { message: 'Заголовок должен содержать от 5 до 300 символов' }).max(300, { message: 'Заголовок должен содержать от 5 до 300 символов' }),
@@ -33,12 +35,15 @@ export const CreateOrder: FC = () => {
             budget: null
         }
     })
+    const navigate = useNavigate()
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
             console.log('Отправка формы:', values)
             const response = await createOrder(values).unwrap();
-            toast('Заказ создан')
+            toast('Заказ успешно создан')
+            navigate(ROUTES.MAIN)
+
         } catch (error: any) {
             handleApiError(error)
         }

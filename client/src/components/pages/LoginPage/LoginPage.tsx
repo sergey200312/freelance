@@ -10,6 +10,8 @@ import { toast } from 'sonner'
 import { handleApiError } from '../../../utils/handleApiError'
 import { useDispatch } from 'react-redux'
 import { login as authLogin } from '../../../store/features/authSlice'
+import { useNavigate } from 'react-router-dom'
+import { ROUTES } from '../../../router/constats'
 
 const formSchema = z.object({
   email: z.string().email({ message: 'Невалидный email' }),
@@ -19,6 +21,7 @@ const formSchema = z.object({
 export const LoginPage: FC = () => {
   const [login, { isLoading }] = useLoginMutation()
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -34,6 +37,8 @@ export const LoginPage: FC = () => {
       const response = await login(values).unwrap()
       dispatch(authLogin(response.token))
       toast('Вы успешно вошли в аккаунт')
+      navigate(ROUTES.MAIN)
+
     } catch (error: any) {
       handleApiError(error)
     }
