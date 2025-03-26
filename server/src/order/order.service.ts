@@ -76,8 +76,14 @@ export class OrderService {
   }
 
 
-  findOne(id: number) {
-    return `This action returns a #${id} order`;
+  async findOne(id: string) {
+    const order = await this.orderModel.findOne({ _id: id })
+
+    if (!order) {
+      return { message: 'Заказ не найден'}
+    }
+
+    return order
   }
 
   async findMyOrders(userId: string) {
