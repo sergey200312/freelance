@@ -15,8 +15,8 @@ export class ProposalService {
     @InjectModel(Proposal.name) private proposalModel: Model<ProposalDocument>
   ) { }
 
-  async create(createProposalDto: CreateProposalDto) {
-    const { freelancer, order, comment, proposedPrice } = createProposalDto
+  async create(freelancer: string, createProposalDto: CreateProposalDto, order: string) {
+    const { comment, proposedPrice } = createProposalDto
     const orderData = await this.orderModel.findById(order)
 
     if (!orderData) return { message: 'Заказ не найден' }
@@ -51,14 +51,31 @@ export class ProposalService {
     return newProposal;
   }
 
-  async findAll(userId: string) {
-    const orders = await this.orderModel.find({ user: userId }) 
+  async findAll(currentUser: string, orderId: string) {
 
-    if (!orders.length) {
-      return { message: 'Список размещенных заказов пуст' }
+    const order = await this.orderModel.findOne({ _id: orderId }).exec()
+
+    if (!order) {
+      return { message: 'Заказ не найден'}
     }
 
-    return { orders }
+    if (order.client.toString() !== currentUser) {
+      return { message: 'Вы не можете получить список предложений, т.к. не являетесь заказчиком'}
+    }
+
+    const proposals = await this.proposalModel
+    .find({ order: orderId })
+    .populate({
+      path:'freelancer',
+      select: 'username avatar_url'
+    }).exec()
+
+    if (!proposals.length) {
+      return { message: 'Список предложений пуст'}
+    }
+
+    return proposals
+
   }
 
   async findOne(userId: string, orderId: string) {

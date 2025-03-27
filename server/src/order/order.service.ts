@@ -78,9 +78,21 @@ export class OrderService {
 
   async findOne(id: string) {
     const order = await this.orderModel.findOne({ _id: id })
+      .populate({
+        path: 'category',
+        select: 'name',
+        populate: ({
+          path: 'parent',
+          select: 'name'
+        })
+      })
+      .populate({
+        path: 'client',
+        select: 'username'
+      })
 
     if (!order) {
-      return { message: 'Заказ не найден'}
+      return { message: 'Заказ не найден' }
     }
 
     return order
