@@ -11,7 +11,7 @@ export const MyPosterOrders: FC = () => {
     return (
         <MainLayout >
             <div className='mb-6'>
-                {isLoading ? <Loader /> : <OrderList orders={data} />}
+                {isLoading ? <Loader /> : data &&  <OrderList orders={data} />}
             </div>
         </MainLayout>
     )
