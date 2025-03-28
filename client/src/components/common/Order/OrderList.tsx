@@ -12,7 +12,7 @@ interface IOrderListProps {
 }
 export const OrderList: FC<IOrderListProps> = ({ orders }) => {
     return (
-        <div className='bg-gray-200 border border-gray-200 rounded-xl p-4 shadow-default min-w-[300px]'>
+        <div className='bg-white border border-gray-200 rounded-xl p-4 shadow-default min-w-[300px]'>
             {orders && orders.length > 0 ? (orders?.map((order: IGetOrder) => (
                 <OrderItem 
                 key={order._id}

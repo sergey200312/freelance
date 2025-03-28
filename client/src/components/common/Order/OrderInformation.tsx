@@ -30,7 +30,7 @@ export const OrderInformation: FC<IOrderInformationProps> = ({ _id, category, cl
                 <div className="space-y-2">
                     <div className="flex justify-between">
                         <h4 className="font-semibold">Заказчик</h4>
-                        <p className='text-blue-500'>{client?.username || 'Не указан'}</p>
+                        <p className='text-blue-600'>{client?.username || 'Не указан'}</p>
                     </div>
                     <div className="flex justify-between">
                         <h4 className="font-semibold">Дата размещения</h4>
