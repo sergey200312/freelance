@@ -1,6 +1,5 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import mongoose, { Document } from 'mongoose';
-import { User } from "src/user/entities/user.entity";
+import mongoose, { Document, mongo } from 'mongoose';
 
 export type ReviewDocument = Review & Document;
 
@@ -12,6 +11,9 @@ export class Review {
 
     @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true })
     sender: mongoose.Types.ObjectId
+
+    @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Order', required: true})
+    order: mongoose.Types.ObjectId
 
     @Prop({ type: String, required: true })
     text: string
