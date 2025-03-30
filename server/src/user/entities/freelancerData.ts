@@ -4,11 +4,9 @@ import mongoose from "mongoose";
 
 @Schema({ timestamps: true })
 export class FreelancerData {
-  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Category' }] })
-  categories?: mongoose.Types.ObjectId[] 
 
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Order' }] })
-  completedOrders?: mongoose.Types.ObjectId[] 
+  orders?: mongoose.Types.ObjectId[] 
 
   @Prop({ type: Number })
   experience?: number;

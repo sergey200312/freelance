@@ -86,10 +86,7 @@ export class OrderService {
           select: 'name'
         })
       })
-      .populate({
-        path: 'client',
-        select: 'username'
-      })
+      .populate('category', 'name')
 
     if (!order) {
       return { message: 'Заказ не найден' }
@@ -119,6 +116,29 @@ export class OrderService {
     }
 
     return orders
+  }
+
+  async findMyExecutionOrders(userId: string) {
+    const orders = await this.orderModel.find({ freelancer: userId })
+      .populate({
+        path: 'client',
+        select: 'username avatar_url'
+      })
+      .populate({
+        path: 'category',
+        select: 'name',
+        populate: ({
+          path: 'parent',
+          select: 'name'
+        })
+      })
+      .exec()
+
+      if (!orders.length) {
+        return { message: 'Выполняемые заказы не найдены'}
+      }
+
+      return orders
   }
 
 

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ProposalService } from './proposal.service';
 import { CreateProposalDto } from './dto/create-proposal.dto';
 import { UpdateProposalDto } from './dto/update-proposal.dto';
@@ -13,6 +13,7 @@ export class ProposalController {
 
   @Post(':id')
   @UseGuards(JwtAuthGuard)
+  @UsePipes(new ValidationPipe())
   create(@CurrentUser() user: IUser, @Body() createProposalDto: CreateProposalDto, @Param('id') orderId: string) {
     return this.proposalService.create(user._id, createProposalDto, orderId);
   }

@@ -29,6 +29,12 @@ export class OrderController {
     return this.orderService.findMyOrders(user._id)
   }
 
+  @Get('executing')
+  @UseGuards(JwtAuthGuard)
+  findMyExecutuinOrders(@CurrentUser() user: IUser) {
+    return this.orderService.findMyExecutionOrders(user._id)
+  }
+
   @Get(':id')
   @UseGuards(JwtAuthGuard)
   findOne(@Param('id') id: string) {
