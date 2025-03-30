@@ -35,8 +35,8 @@ export const LoginPage: FC = () => {
     try {
       console.log('Отправка формы:', values) 
       const response = await login(values).unwrap()
-      const { token, _id, email } = response
-      dispatch(authLogin({ token, _id, email }))
+      const { token, _id, email, avatar_url } = response
+      dispatch(authLogin({ token, _id, email, avatar_url }))
       toast('Вы успешно вошли в аккаунт')
       navigate(ROUTES.MAIN)
 

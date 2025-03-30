@@ -20,7 +20,10 @@ export const MainPage: FC = () => {
       <div className='mb-6'>
         <Filters />
       </div>
-      { isLoading ? <Loader /> : <OrderList orders = {data} /> }
+      <div className='bg-white border border-gray-200 rounded-xl p-4 shadow-default min-w-[300px]'>
+        {isLoading ? <Loader /> : <OrderList orders={data} />}
+      </div>
     </MainLayout>
   )
 }
+

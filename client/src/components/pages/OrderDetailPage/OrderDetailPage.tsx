@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { MainLayout } from '../../../layouts/MainLayout';
 import { OrderInformation } from '../../common/Order/OrderInformation';
 import { useParams } from 'react-router-dom';
@@ -11,16 +11,20 @@ import { ProposalList } from '../../common/Proposal/ProposalList';
 
 export const OrderDetailPage: FC = () => {
   const currentUser = useSelector((state: RootState) => state.auth.user._id);
+  console.log(currentUser)
+
   const { id } = useParams();
 
   const { data: orderData, isLoading: isOrderLoading } = useGetDetailsOrderQuery(String(id));
 
-  const isCurrentUserOrder = orderData?.client?._id === currentUser;
+  const isCurrentUserOrder = orderData?.client?._id === currentUser
+  console.log(orderData?.client?._id)
 
-  const { data: proposalData, isLoading: proposalIsLoading } = useGetAllProposalsQuery(String(id), {
+  const { data: proposalData, isLoading: isProposalIsLoading } = useGetAllProposalsQuery(String(id), {
     skip: !isCurrentUserOrder
   });
 
+  
 
   return (
     <MainLayout>
@@ -46,7 +50,7 @@ export const OrderDetailPage: FC = () => {
         {isCurrentUserOrder && (
           <div className='mt-5'>
             <h3 className='text-lg font-bold mb-2'>Список предложений к выполнению заказа</h3>
-            {proposalIsLoading ? <Loader /> : proposalData && <ProposalList proposals={proposalData} />}
+            <ProposalList proposals={proposalData} />
           </div>
         )}
       </div>
